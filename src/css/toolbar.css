@@ -1,0 +1,20 @@
+.RichEditor-controls {
+    border-top:1px solid #dee0e1;
+    border-bottom:1px solid #dee0e1;
+}
+.RichEditor-controls button{
+    display:inline-block;
+    width:40px;
+    height:40px;
+    border-radius: 0;
+}
+.RichEditor-controls button:hover{
+    background:#ccc;
+    color:#f8f8f9;
+}
+.RichEditor-controls .icon{
+    font-size:16px;
+}
+.RichEditor-activeButton{
+    color:#0080ff;
+}

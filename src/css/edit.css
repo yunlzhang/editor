@@ -1,0 +1,7 @@
+.DraftEditor-root{
+    padding:0 15px;
+    margin:15px 0;
+}
+.RichEditor-hidePlaceholder .public-DraftEditorPlaceholder-root {
+    display: none;
+}
