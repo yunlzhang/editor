@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Editor, EditorState,convertToRaw,ContentState} from 'draft-js';
+import {Editor, EditorState,convertToRaw,ContentState,ContentBlock,genKey} from 'draft-js';
 import ToolBar from './toolbar';
 
 import {stateToHTML} from 'draft-js-export-html';
@@ -42,6 +42,23 @@ class MyEditor extends React.Component {
       return "handled";
     }
     
+  }
+  jumpOut(editorState) {
+    let contentState = editorState.getCurrentContent();
+    //创建Block
+    const newBlock = new ContentBlock({
+      key: genKey(),
+      type: 'unstyled',
+      text: ''
+    })
+    //使用immutable的方式插入数据
+    const newBlockMap = contentState.getBlockMap().set(newBlock.key, newBlock)
+
+    return EditorState.moveFocusToEnd(EditorState.push(
+        editorState,
+        ContentState
+          .createFromBlockArray(newBlockMap.toArray())
+      ));
   }
 
 
