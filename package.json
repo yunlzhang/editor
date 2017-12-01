@@ -23,6 +23,7 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
-    "draft-js-export-html": "^1.2.0"
+    "draft-js-export-html": "^1.2.0",
+    "immutable": "^3.8.2"
   }
 }

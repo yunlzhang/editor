@@ -62,7 +62,6 @@ class Button extends React.Component {
 
     render() {
         let className = 'RichEditor-styleButton';
-        console.log(this.props.active)
         if (this.props.active) {
             className += ' RichEditor-activeButton';
         }

@@ -5,6 +5,8 @@ import ToolBar from './toolbar';
 
 import {stateToHTML} from 'draft-js-export-html';
 
+import {getCurrentBlock,resetBlockWithType,addNewBlockAt} from './model'
+
 /**
  * css
  */
@@ -25,8 +27,24 @@ class MyEditor extends React.Component {
       const content = this.state.editorState.getCurrentContent();
       let html = stateToHTML(content);
     }
+    this.handleReturn = this.handleReturn.bind(this);
   }
-  
+  handleReturn(e) {
+    var editor = this.state.editorState
+    // 得到当前ContentState对象
+    var content = this.state.editorState.getCurrentContent()
+    var prevKey = editor.getSelection().getStartKey()
+    // 判断当前内容块是否为空
+    if(content.getBlockForKey(prevKey).getText() == ""){
+      // 重绘编辑器
+      this.setState({editorState:this.jumpOut(editor)})
+      // 阻止默认行为
+      return "handled";
+    }
+    
+  }
+
+
   render() {
 
 	const {editorState} = this.state;
@@ -40,11 +58,12 @@ class MyEditor extends React.Component {
 	}
     return (
         <div className={className}>
-		<ToolBar editorState={this.state.editorState} onChange={this.onChange}/>
+		        <ToolBar editorState={this.state.editorState} onChange={this.onChange}/>
 		<Editor editorState={this.state.editorState} 
 				onChange={this.onChange}
         placeholder="输入内容......" 
         spellCheck={true}
+        handleReturn={this.handleReturn}
 		/>		
 		</div>
     );
